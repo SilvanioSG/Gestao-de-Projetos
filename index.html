@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Gestor · Silvanio Gois</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #f5f9fc;
+            color: #1e2b37;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        :root {
+            --azul: rgb(39, 98, 141);
+            --azul-claro: rgba(39, 98, 141, 0.08);
+            --azul-escuro: rgb(26, 70, 102);
+            --cinza-fundo: #f5f9fc;
+        }
+
+        .header {
+            background-color: var(--azul);
+            color: white;
+            padding: 1.8rem 2rem;
+            border-radius: 0 0 2.5rem 2.5rem;
+            margin: 0 -1rem 2.5rem -1rem;
+            box-shadow: 0 6px 18px rgba(39, 98, 141, 0.25);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            background-color: white;
+        }
+
+        .header-titulo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-titulo h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .header-titulo .subtitulo {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header-acoes {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .header-contato,
+        .btn-print {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            backdrop-filter: blur(2px);
+            transition: background 0.2s;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .header-contato:hover,
+        .btn-print:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .header-contato a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-print {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .intro {
+            font-size: 1.15rem;
+            background: white;
+            padding: 1.8rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border-left: 6px solid var(--azul);
+            margin-bottom: 2.5rem;
+        }
+
+        .intro strong {
+            color: var(--azul);
+        }
+
+        /* ÍNDICE */
+        .indice {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(39, 98, 141, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .indice h2 {
+            font-size: 1.3rem;
+            color: var(--azul);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .indice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.4rem 1rem;
+        }
+
+        .indice-grid a {
+            color: var(--azul-escuro);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.2rem 0;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.2s;
+            display: inline-block;
+        }
+
+        .indice-grid a:hover {
+            border-bottom-color: var(--azul);
+        }
+
+        .indice-grid .num {
+            font-weight: 700;
+            color: var(--azul);
+            margin-right: 0.3rem;
+        }
+
+        .topicos {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .topico {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(39, 98, 141, 0.10);
+            transition: border-color 0.2s;
+            scroll-margin-top: 2rem;
+        }
+
+        .topico:hover {
+            border-color: rgba(39, 98, 141, 0.3);
+        }
+
+        .topico h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--azul);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .topico h2 .badge-topico {
+            background: var(--azul);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.1rem 0.9rem;
+            border-radius: 30px;
+            margin-left: 0.3rem;
+            white-space: nowrap;
+        }
+
+        .topico p {
+            margin-bottom: 0.8rem;
+        }
+
+        .topico ul {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 0.2rem 0;
+        }
+
+        .topico ul li {
+            margin-bottom: 0.25rem;
+        }
+
+        .destaque {
+            background: var(--azul-claro);
+            padding: 1rem 1.4rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0 0 0;
+            font-style: italic;
+            border-left: 4px solid var(--azul);
+        }
+
+        /* ANOTAÇÕES */
+        .anotacao {
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 2px dashed rgba(39, 98, 141, 0.15);
+            font-size: 0.9rem;
+            color: var(--azul-escuro);
+        }
+
+        .anotacao-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--azul);
+            opacity: 0.7;
+        }
+
+        .anotacao-area {
+            background: #fafcfe;
+            border: 1px solid rgba(39, 98, 141, 0.15);
+            border-radius: 0.8rem;
+            padding: 0.8rem 1rem;
+            min-height: 3.5rem;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #1e2b37;
+            line-height: 1.5;
+            width: 100%;
+            resize: vertical;
+        }
+
+        .anotacao-area:focus {
+            border-color: var(--azul);
+            background: white;
+        }
+
+        .anotacao-area:empty:before {
+            content: "Clique para adicionar suas anotações...";
+            color: #a0b8c9;
+            font-style: italic;
+        }
+
+        /* CHECKLIST REFORMULADO */
+        .checklist {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            border: 1px solid rgba(39, 98, 141, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .checklist h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--azul);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--azul-claro);
+            padding-bottom: 0.8rem;
+        }
+
+        .checklist-fases {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .fase {
+            background: #fafcfe;
+            border-radius: 1rem;
+            padding: 1.2rem 1.5rem;
+            border-left: 5px solid var(--azul);
+        }
+
+        .fase-titulo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--azul-escuro);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fase-titulo span {
+            background: var(--azul);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.1rem 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .fase-itens {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.4rem 0.8rem;
+        }
+
+        .fase-itens li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            padding: 0.3rem 0.3rem 0.3rem 0;
+            border-bottom: 1px dashed rgba(39, 98, 141, 0.08);
+        }
+
+        .fase-itens li .num {
+            font-weight: 700;
+            color: var(--azul);
+            background: var(--azul-claro);
+            border-radius: 50%;
+            width: 1.8rem;
+            height: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .fase-itens li .texto {
+            flex: 1;
+        }
+
+        .fase-itens li .badge {
+            font-size: 0.7rem;
+            background: #eef3f7;
+            color: var(--azul-escuro);
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .fase-itens {
+                grid-template-columns: 1fr;
+            }
+            .fase {
+                padding: 1rem;
+            }
+            .indice-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            background-color: var(--azul);
+            color: white;
+            text-align: center;
+            padding: 1.8rem 1rem;
+            border-radius: 2rem 2rem 0 0;
+            margin: 2rem -1rem 0 -1rem;
+            font-size: 0.95rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .footer a:hover {
+            border-bottom-color: white;
+        }
+
+        .footer .link-site {
+            display: inline-block;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-topo {
+            position: fixed;
+            bottom: 2rem;
+            right: 1.5rem;
+            background-color: var(--azul);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(39, 98, 141, 0.4);
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            z-index: 999;
+        }
+
+        .btn-topo.visivel {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .btn-topo:hover {
+            background-color: var(--azul-escuro);
+            transform: scale(1.06);
+        }
+
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 1.5rem 1.2rem;
+            }
+            .header-left {
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-titulo h1 {
+                font-size: 1.8rem;
+            }
+            .header-acoes {
+                justify-content: center;
+            }
+            .topico {
+                padding: 1.4rem 1.2rem;
+            }
+            .intro {
+                padding: 1.4rem 1.2rem;
+                font-size: 1rem;
+            }
+            .btn-topo {
+                width: 42px;
+                height: 42px;
+                font-size: 1.3rem;
+                bottom: 1.2rem;
+                right: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-titulo h1 {
+                font-size: 1.5rem;
+            }
+            .header-left img {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        /* Estilo para impressão */
+        @media print {
+            .header-acoes .btn-print,
+            .header-acoes .header-contato,
+            .btn-topo {
+                display: none !important;
+            }
+            .header {
+                margin: 0;
+                border-radius: 0;
+            }
+            .anotacao-area {
+                border: 1px solid #ccc;
+                min-height: 2.5rem;
+            }
+            .anotacao-area:empty:before {
+                content: "Anotações:";
+                color: #666;
+            }
+            .topico {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .indice {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <img src="Gestão_SG.png" alt="Silvanio Gois">
+            <div class="header-titulo">
+                <h1>Guia do Gestor</h1>
+                <span class="subtitulo">Silvanio Gois · gestão de projetos</span>
+            </div>
+        </div>
+        <div class="header-acoes">
+            <div class="header-contato">
+                <a href="https://wa.me/5513988301094?text=Olá%2C%20vim%20pelo%20guia%20de%20gestão!" target="_blank" rel="noopener">
+                    Contato
+                </a>
+            </div>
+            <button class="btn-print" onclick="window.print()" aria-label="Imprimir ou salvar como PDF">
+                🖨️ Imprimir / PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <p><strong>Olá, gestor.</strong> Este guia foi organizado para seguir o fluxo natural de um projeto: da ideia à entrega, passando por todas as áreas que realmente importam. Cada tópico conversa com o anterior, construindo uma visão completa e prática. Use-o como um roteiro, mas sempre com o seu toque pessoal – porque a gestão é tanto técnica quanto humana. Ao final de cada seção, você encontrará um espaço para anotações; use-o para registrar suas reflexões e adaptações à sua realidade.</p>
+        </div>
+
+        <!-- ÍNDICE -->
+        <nav class="indice" aria-label="Índice do guia">
+            <h2>📑 Navegação rápida</h2>
+            <div class="indice-grid">
+                <a href="#topico-1"><span class="num">1.</span> Liderança e Motivação</a>
+                <a href="#topico-2"><span class="num">2.</span> Cultura, Propósito e Valores</a>
+                <a href="#topico-3"><span class="num">3.</span> Análise de Viabilidade</a>
+                <a href="#topico-4"><span class="num">4.</span> Termo de Abertura (TAP)</a>
+                <a href="#topico-5"><span class="num">5.</span> Stakeholders</a>
+                <a href="#topico-6"><span class="num">6.</span> Gestão de Conflitos e Negociação</a>
+                <a href="#topico-7"><span class="num">7.</span> Escopo</a>
+                <a href="#topico-8"><span class="num">8.</span> Tempo, Custos e Qualidade</a>
+                <a href="#topico-9"><span class="num">9.</span> Métricas e Indicadores</a>
+                <a href="#topico-10"><span class="num">10.</span> Recursos</a>
+                <a href="#topico-11"><span class="num">11.</span> Ferramentas e Ambientes Digitais</a>
+                <a href="#topico-12"><span class="num">12.</span> Comunicações</a>
+                <a href="#topico-13"><span class="num">13.</span> Riscos</a>
+                <a href="#topico-14"><span class="num">14.</span> Aquisições</a>
+                <a href="#topico-15"><span class="num">15.</span> Plano de Gerenciamento</a>
+                <a href="#topico-16"><span class="num">16.</span> Execução e Orientação</a>
+                <a href="#topico-17"><span class="num">17.</span> Gestão do Conhecimento</a>
+                <a href="#topico-18"><span class="num">18.</span> Retrospectivas e Aprendizado</a>
+                <a href="#topico-19"><span class="num">19.</span> Gestão da Mudança</a>
+                <a href="#topico-20"><span class="num">20.</span> Monitoramento e Controle</a>
+                <a href="#topico-21"><span class="num">21.</span> Controle de Mudanças</a>
+                <a href="#topico-22"><span class="num">22.</span> Encerramento e Lições</a>
+                <a href="#topico-23"><span class="num">23.</span> Transição para Produto</a>
+            </div>
+        </nav>
+
+        <div class="topicos">
+
+            <!-- 1. Liderança -->
+            <section class="topico" id="topico-1">
+                <h2>1. Liderança e Motivação <span class="badge-topico">fundamento</span></h2>
+                <p>Antes de qualquer ferramenta, está a pessoa que lidera. Liderar é inspirar, apoiar e conduzir a equipe com empatia e clareza. Celebrar vitórias, dar feedbacks construtivos, ser transparente sobre os desafios – tudo isso fortalece o time. Eu acredito que liderar é servir: remover obstáculos, ouvir preocupações e confiar no potencial de cada um. Um projeto bem-sucedido é fruto de uma equipe engajada, e isso começa com você.</p>
+                <div class="destaque">“Motivação não é um botão que você liga; é um ambiente que você cultiva. Pequenos gestos de reconhecimento fazem a diferença.”</div>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 2. Cultura, Propósito e Valores -->
+            <section class="topico" id="topico-2">
+                <h2>2. Cultura, Propósito e Valores <span class="badge-topico">alicerce</span></h2>
+                <p>Todo projeto nasce em um contexto cultural e, ao mesmo tempo, pode transformá-lo. É fundamental alinhar o projeto ao propósito maior da organização e definir quais valores irão guiar as decisões – transparência, respeito, inovação, colaboração. Uma cultura forte dá coesão ao time e sustenta a motivação mesmo nos momentos difíceis. Pergunte-se: o que este projeto representa para a empresa e para as pessoas? Essa reflexão orienta cada escolha.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 3. Viabilidade -->
+            <section class="topico" id="topico-3">
+                <h2>3. Análise de Viabilidade <span class="badge-topico">decisão</span></h2>
+                <p>Antes de formalizar o projeto, é preciso saber se ele realmente vale a pena. A análise de viabilidade avalia aspectos técnicos, econômicos, legais e operacionais. É o momento de responder: temos capacidade? O retorno justifica o investimento? Existem riscos que inviabilizam? Muitas vezes, um bom estudo de viabilidade evita que recursos sejam desperdiçados em ideias que não se sustentam. Como gestor, participe ativamente dessa fase – ela define se o projeto vai ou não sair do papel.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 4. TAP -->
+            <section class="topico" id="topico-4">
+                <h2>4. Termo de Abertura (TAP) <span class="badge-topico">início</span></h2>
+                <p>O TAP é a certidão de nascimento do projeto. Ele formaliza o que vamos construir, com objetivos, justificativa, cronograma inicial, orçamento, riscos mapeados e partes interessadas. Para mim, o TAP é o documento que nos dá respaldo para começar com clareza. Sem ele, o gestor fica à deriva, sem autoridade para agir. Certifique-se de que todas as partes envolvidas concordem com o conteúdo antes de assiná-lo.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 5. Stakeholders -->
+            <section class="topico" id="topico-5">
+                <h2>5. Gestão de Stakeholders <span class="badge-topico">pessoas</span></h2>
+                <p>Stakeholders são todos que têm interesse ou influência no projeto – patrocinadores, clientes, equipe, fornecedores, usuários finais. Gerenciar stakeholders é, antes de tudo, entender suas expectativas, necessidades e poder de influência. Eu aprendi que o sucesso de um projeto depende tanto do produto final quanto do relacionamento com as pessoas. Mapeie, analise, engaje e mantenha uma comunicação transparente. Um stakeholder alinhado é um aliado; um desalinhado pode ser um grande risco.</p>
+                <div class="destaque">“Dedique tempo para ouvir, mesmo que seja uma conversa rápida. Muitos problemas são resolvidos antes de aparecerem quando você mantém os stakeholders próximos.”</div>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 6. Conflitos -->
+            <section class="topico" id="topico-6">
+                <h2>6. Gestão de Conflitos e Negociação <span class="badge-topico">mediação</span></h2>
+                <p>Conflitos são inevitáveis – entre membros da equipe, com stakeholders, com fornecedores. Um gestor precisa saber mediar, negociar e transformar divergências em oportunidades. A chave está na escuta ativa, em separar interesses de posições e em buscar soluções que agreguem valor. Não evite o conflito; enfrente-o com respeito e objetividade. Muitas vezes, uma boa negociação resolve problemas que nem estavam no radar do projeto.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 7. Escopo -->
+            <section class="topico" id="topico-7">
+                <h2>7. Gestão do Escopo <span class="badge-topico">limites</span></h2>
+                <p>O escopo define o que será entregue – e também o que não será. Planejar, coletar requisitos, criar a EAP (Estrutura Analítica do Projeto) e validar com o cliente. Controlar o escopo é a disciplina que evita o “escopo inchado”. Já vi projetos se perderem por promessas extras; por isso, defina limites com clareza e proteja o time de desvios. O escopo bem definido é a base para todos os outros planos.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 8. Tempo, Custos, Qualidade -->
+            <section class="topico" id="topico-8">
+                <h2>8. Tempo, Custos e Qualidade <span class="badge-topico">pilares</span></h2>
+                <p>Os três pilares que sustentam o projeto:</p>
+                <ul>
+                    <li><strong>Tempo:</strong> definir atividades, sequenciar, estimar durações, controlar cronogramas. Técnicas como caminho crítico ajudam a prever atrasos.</li>
+                    <li><strong>Custos:</strong> planejar, estimar, orçar e controlar. A análise de valor agregado mostra se estamos dentro do orçamento e prazo.</li>
+                    <li><strong>Qualidade:</strong> planejar padrões, gerenciar processos e controlar entregas. Equilibrar o custo da qualidade (prevenção) com o custo da não qualidade (retrabalho) é um desafio constante.</li>
+                </ul>
+                <p>Esses três elementos são inseparáveis: mexer em um afeta os outros. O papel do líder é manter o equilíbrio, como um maestro regendo uma orquestra.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 9. Métricas -->
+            <section class="topico" id="topico-9">
+                <h2>9. Métricas e Indicadores de Desempenho <span class="badge-topico">medida</span></h2>
+                <p>O que não é medido não é gerenciado. Definir KPIs claros desde o início – prazo, custo, qualidade, satisfação dos stakeholders, produtividade da equipe – permite acompanhar a saúde do projeto. Use gráficos de evolução, análise de valor agregado (EVA) e dashboards que facilitem a tomada de decisão. Revisite esses indicadores periodicamente com a equipe e ajuste a rota sempre que necessário. Transparência nos números gera confiança e foco.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 10. Recursos -->
+            <section class="topico" id="topico-10">
+                <h2>10. Gestão de Recursos <span class="badge-topico">equipe</span></h2>
+                <p>Recursos vão além de pessoas: incluem equipamentos, materiais, instalações. Mas o foco principal é a equipe. Planeje a alocação, desenvolva habilidades, crie um ambiente de confiança e reconhecimento. Um time motivado entrega muito mais. Eu procuro conhecer as aspirações de cada membro e distribuí-los em tarefas que os desafiem e os façam crescer. Recursos bem gerenciados são o motor do projeto.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 11. Ferramentas -->
+            <section class="topico" id="topico-11">
+                <h2>11. Ferramentas e Ambientes Digitais <span class="badge-topico">tecnologia</span></h2>
+                <p>O gestor moderno tem à disposição um ecossistema de ferramentas: softwares de gestão (MS Project, Jira, Trello, Asana), plataformas de colaboração (Teams, Slack), documentação (Confluence, Notion) e automação. A escolha certa depende do contexto – tamanho do time, complexidade do projeto, cultura da empresa. Mais importante do que a ferramenta em si é como ela é usada: integre-a ao fluxo de trabalho, treine a equipe e evite ferramentas que gerem mais burocracia do que agilidade.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 12. Comunicações -->
+            <section class="topico" id="topico-12">
+                <h2>12. Gestão de Comunicações <span class="badge-topico">conexão</span></h2>
+                <p>Comunicação é a ponte entre o planejamento e a execução. Planeje quem precisa receber o quê, com que frequência e por qual canal. Relatórios de status, reuniões, dashboards, e-mails – tudo deve ser adequado ao público. Uma comunicação falha gera ruídos, retrabalho e desconfiança. Na minha experiência, comunicar com clareza e empatia é tão importante quanto entregar no prazo. E lembre-se: ouvir é parte da comunicação.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 13. Riscos -->
+            <section class="topico" id="topico-13">
+                <h2>13. Gestão de Riscos <span class="badge-topico">antecipação</span></h2>
+                <p>Risco é tudo o que pode afetar o projeto, para o bem ou para o mal. Identifique, analise (probabilidade x impacto), planeje respostas (mitigar, transferir, aceitar) e monitore continuamente. Um bom gestor não foge dos riscos; ele os antecipa. Eu mantenho um registro de riscos vivo, revisado em cada reunião de equipe. Isso nos dá tranquilidade para lidar com imprevistos sem pânico.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 14. Aquisições -->
+            <section class="topico" id="topico-14">
+                <h2>14. Gestão de Aquisições <span class="badge-topico">fornecedores</span></h2>
+                <p>Quando o projeto precisa de bens ou serviços externos, entram as aquisições. Planejar o que comprar, selecionar fornecedores, administrar contratos e encerrar compras. Uma boa gestão de aquisições evita atrasos e custos extras. Já vi projetos pararem por falta de um componente simples; por isso, mantenho um relacionamento próximo com fornecedores e reviso os contratos com atenção.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 15. Plano de Gerenciamento -->
+            <section class="topico" id="topico-15">
+                <h2>15. Plano de Gerenciamento <span class="badge-topico">mapa</span></h2>
+                <p>Agora que detalhamos cada área, o Plano de Gerenciamento é o documento que reúne todos os subplanos – escopo, cronograma, custos, qualidade, recursos, comunicações, riscos, aquisições e stakeholders. Também define as linhas de base e como as mudanças serão tratadas. É o mapa que guia a equipe e evita improvisos. Revisito esse plano constantemente, pois ele é um norte vivo, não um documento engessado.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 16. Execução -->
+            <section class="topico" id="topico-16">
+                <h2>16. Orientar e Gerenciar o Trabalho <span class="badge-topico">execução</span></h2>
+                <p>É a hora de colocar o plano em ação. O gestor acompanha o progresso, compara com o planejado, ajusta rotas e avalia solicitações de mudança. Gosto de comparar com pilotar um avião: você segue o plano de voo, mas está atento às turbulências. O líder precisa manter o ritmo, remover obstáculos e garantir que o trabalho avance com consistência, sem perder o foco no destino.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 17. Conhecimento -->
+            <section class="topico" id="topico-17">
+                <h2>17. Gerenciamento do Conhecimento <span class="badge-topico">aprendizado</span></h2>
+                <p>Cada projeto é uma escola. O conhecimento pode ser tácito (experiência pessoal) ou explícito (documentado). Incentivar trocas – reuniões, comunidades de prática, conversas informais – transforma cada ciclo em crescimento coletivo. Eu sempre digo que o verdadeiro legado de um projeto não são só as entregas, mas o aprendizado que fica na equipe.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 18. Retrospectivas -->
+            <section class="topico" id="topico-18">
+                <h2>18. Retrospectivas e Aprendizado Contínuo <span class="badge-topico">reflexão</span></h2>
+                <p>Não espere o fim do projeto para aprender. Realize retrospectivas periódicas – ao final de cada fase ou em ciclos regulares – para que a equipe pare, reflita sobre o que funcionou, o que pode melhorar e quais ações tomar. Esse hábito mantém o projeto ágil, evita a repetição de erros e fortalece a cultura de melhoria contínua. As lições capturadas no meio do caminho são tão valiosas quanto as do encerramento.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 19. Gestão da Mudança -->
+            <section class="topico" id="topico-19">
+                <h2>19. Gestão da Mudança Organizacional <span class="badge-topico">transição</span></h2>
+                <p>Projetos trazem mudanças, mas nem sempre as pessoas estão prontas para elas. A gestão da mudança prepara a organização para absorver o novo – seja um sistema, um processo ou uma estrutura. Comunique os benefícios, treine os usuários, envolva os líderes e meça a adoção. A resistência é natural, mas pode ser mitigada com empatia e planejamento. Lembre-se: o projeto só é bem-sucedido se a mudança realmente acontecer.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 20. Monitoramento -->
+            <section class="topico" id="topico-20">
+                <h2>20. Monitoramento e Controle <span class="badge-topico">pulso</span></h2>
+                <p>Comparar o planejado com o realizado, acompanhar cronogramas, curvas de avanço, riscos e a comunicação com os stakeholders. Monitorar não é só observar; é agir rápido quando surgem desvios. Um monitoramento eficaz evita que pequenos problemas virem crises. É o pulso do projeto, que nos mantém saudáveis e dentro dos limites.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 21. Controle de Mudanças -->
+            <section class="topico" id="topico-21">
+                <h2>21. Controle Integrado de Mudanças <span class="badge-topico">filtro</span></h2>
+                <p>Mudanças são inevitáveis, mas precisam passar por um crivo. Avaliar impactos em escopo, cronograma, custos e recursos. Só o que agrega valor deve entrar; o que compromete o resultado, a gente barra. Ser firme nesse controle é proteger o projeto de distorções que podem desviar seu propósito. Aprender a dizer “não” com dados é uma habilidade essencial.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 22. Encerramento -->
+            <section class="topico" id="topico-22">
+                <h2>22. Encerramento e Lições Aprendidas <span class="badge-topico">fechamento</span></h2>
+                <p>Encerrar é validar e formalizar. Comparar o planejado com o realizado, garantir que as entregas foram aceitas e documentar as lições aprendidas – o que deu certo, o que pode ser melhorado. É também o momento de reconhecer a equipe e celebrar. Um bom encerramento não é apenas fechar o ciclo, mas abrir caminho para novos projetos com mais maturidade.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+            <!-- 23. Transição -->
+            <section class="topico" id="topico-23">
+                <h2>23. Transição de Projeto para Produto <span class="badge-topico">legado</span></h2>
+                <p>Nem todo projeto termina; muitos se transformam em produtos ou serviços que continuam evoluindo. A transição envolve entregar o projeto para a área de operações, garantir que a documentação esteja completa, treinar as equipes de suporte e estabelecer um plano de manutenção. Essa passagem suave evita que o esforço do projeto se perca e assegura que o valor gerado perdure no tempo.</p>
+                <div class="anotacao">
+                    <span class="anotacao-label">📝 Minhas anotações</span>
+                    <div class="anotacao-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- CHECKLIST REFORMULADO -->
+        <div class="checklist">
+            <h3> Checklist sequencial para gestores</h3>
+            <div class="checklist-fases">
+
+                <!-- Fase 1: Iniciação -->
+                <div class="fase">
+                    <div class="fase-titulo">
+                        🔹 Iniciação <span>1–6</span>
+                    </div>
+                    <ul class="fase-itens">
+                        <li><span class="num">1</span><span class="texto">Liderança e Motivação</span><span class="badge">fundamento</span></li>
+                        <li><span class="num">2</span><span class="texto">Cultura, Propósito e Valores</span><span class="badge">alicerce</span></li>
+                        <li><span class="num">3</span><span class="texto">Análise de Viabilidade</span><span class="badge">decisão</span></li>
+                        <li><span class="num">4</span><span class="texto">Termo de Abertura (TAP)</span><span class="badge">autorização</span></li>
+                        <li><span class="num">5</span><span class="texto">Mapeamento de Stakeholders</span><span class="badge">engajamento</span></li>
+                        <li><span class="num">6</span><span class="texto">Gestão de Conflitos e Negociação</span><span class="badge">mediação</span></li>
+                    </ul>
+                </div>
+
+                <!-- Fase 2: Planejamento -->
+                <div class="fase">
+                    <div class="fase-titulo">
+                        🔸 Planejamento <span>7–15</span>
+                    </div>
+                    <ul class="fase-itens">
+                        <li><span class="num">7</span><span class="texto">Definição do Escopo</span><span class="badge">limites</span></li>
+                        <li><span class="num">8</span><span class="texto">Tempo, Custos e Qualidade</span><span class="badge">pilares</span></li>
+                        <li><span class="num">9</span><span class="texto">Métricas e Indicadores</span><span class="badge">medida</span></li>
+                        <li><span class="num">10</span><span class="texto">Recursos (equipe e materiais)</span><span class="badge">alocação</span></li>
+                        <li><span class="num">11</span><span class="texto">Ferramentas e Ambientes Digitais</span><span class="badge">tecnologia</span></li>
+                        <li><span class="num">12</span><span class="texto">Plano de Comunicações</span><span class="badge">transparência</span></li>
+                        <li><span class="num">13</span><span class="texto">Gestão de Riscos</span><span class="badge">antecipação</span></li>
+                        <li><span class="num">14</span><span class="texto">Aquisições e Fornecedores</span><span class="badge">contratos</span></li>
+                        <li><span class="num">15</span><span class="texto">Plano de Gerenciamento integrado</span><span class="badge">mapa</span></li>
+                    </ul>
+                </div>
+
+                <!-- Fase 3: Execução -->
+                <div class="fase">
+                    <div class="fase-titulo">
+                        🔹 Execução <span>16–19</span>
+                    </div>
+                    <ul class="fase-itens">
+                        <li><span class="num">16</span><span class="texto">Orientar e Gerenciar o Trabalho</span><span class="badge">ação</span></li>
+                        <li><span class="num">17</span><span class="texto">Gerenciamento do Conhecimento</span><span class="badge">aprendizado</span></li>
+                        <li><span class="num">18</span><span class="texto">Retrospectivas e Aprendizado Contínuo</span><span class="badge">reflexão</span></li>
+                        <li><span class="num">19</span><span class="texto">Gestão da Mudança Organizacional</span><span class="badge">transição</span></li>
+                    </ul>
+                </div>
+
+                <!-- Fase 4: Monitoramento e Controle -->
+                <div class="fase">
+                    <div class="fase-titulo">
+                        🔸 Monitoramento e Controle <span>20–21</span>
+                    </div>
+                    <ul class="fase-itens">
+                        <li><span class="num">20</span><span class="texto">Monitoramento de desempenho</span><span class="badge">pulso</span></li>
+                        <li><span class="num">21</span><span class="texto">Controle Integrado de Mudanças</span><span class="badge">filtro</span></li>
+                    </ul>
+                </div>
+
+                <!-- Fase 5: Encerramento -->
+                <div class="fase">
+                    <div class="fase-titulo">
+                        🔹 Encerramento <span>22–23</span>
+                    </div>
+                    <ul class="fase-itens">
+                        <li><span class="num">22</span><span class="texto">Encerramento e Lições Aprendidas</span><span class="badge">fechamento</span></li>
+                        <li><span class="num">23</span><span class="texto">Transição para Produto</span><span class="badge">legado</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div>© 2026 Silvanio Gois - Todos os direitos reservados</div>
+        <div class="link-site">
+            <a href="https://www.silvaniogois.com.br/" target="_blank" rel="noopener">ir ao Site ↗</a>
+        </div>
+    </footer>
+
+    <button class="btn-topo" id="btnTopo" aria-label="Voltar ao topo">↑</button>
+
+    <script>
+        (function() {
+            const btn = document.getElementById('btnTopo');
+            let timeoutId = null;
+
+            function toggleButton() {
+                const scrollY = window.scrollY || window.pageYOffset;
+                if (scrollY > 500) {
+                    btn.classList.add('visivel');
+                } else {
+                    btn.classList.remove('visivel');
+                }
+            }
+
+            window.addEventListener('scroll', function() {
+                if (timeoutId) cancelAnimationFrame(timeoutId);
+                timeoutId = requestAnimationFrame(toggleButton);
+            });
+
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            toggleButton();
+
+            // Garantir que os campos de anotação sejam acessíveis
+            document.querySelectorAll('.anotacao-area').forEach(el => {
+                el.setAttribute('aria-label', 'Campo de anotações pessoais');
+            });
+        })();
+    </script>
+</body>
+</html>
